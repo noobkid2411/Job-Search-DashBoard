@@ -1,0 +1,11 @@
+{
+  "name": "workday-assignment",
+  "version": "1.0.0",
+  "description": "Assignment for Workday SDE Front-end application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
