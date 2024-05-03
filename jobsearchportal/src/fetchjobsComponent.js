@@ -4,6 +4,7 @@ import './styles.css';
 const FetchJobsComponent = () => {
   // State to store the fetched jobs data
   const [jobs, setJobs] = useState([]);
+  const [page, setPage] = useState(1);
 
   // Fetches jobs data on component mount
   useEffect(() => {
@@ -14,8 +15,8 @@ const FetchJobsComponent = () => {
         myHeaders.append("Content-Type", "application/json");
 
         const body = JSON.stringify({
-          limit: 10, // Limit the number of jobs fetched to 10
-          offset: 0,  // Start fetching from the beginning (offset 0)
+          limit: 12, // Limit the number of jobs fetched to 10
+          offset: (page - 1) * 12, // Calculate the offset based on the current page  // Start fetching from the beginning (offset 0)
         });
 
         const requestOptions = {
@@ -40,19 +41,33 @@ const FetchJobsComponent = () => {
         console.log("Fetched Jobs Data:", data.jdList); // Log fetched data for debugging
 
         // Update the jobs state with the fetched data
-        setJobs(data.jdList);
+        setJobs((prevJobs) => [...prevJobs, ...data.jdList]);
       } catch (error) {
         console.error("Error fetching jobs data:", error);
       }
     };
 
     fetchData(); // Call the fetchData function
-  }, []); // Empty dependency array ensures fetching only once on mount
+  }, [page]); // Empty dependency array ensures fetching only once on mount
 
   // Log the jobs data whenever it changes (for debugging purposes)
   useEffect(() => {
     console.log("Jobs data:", jobs);
   }, [jobs]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight
+      ) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   return (
     <div className="containernew">
