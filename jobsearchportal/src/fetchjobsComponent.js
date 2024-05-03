@@ -55,6 +55,8 @@ const FetchJobsComponent = () => {
     console.log("Jobs data:", jobs);
   }, [jobs]);
 
+
+//For handling infinite scrolling
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -71,25 +73,30 @@ const FetchJobsComponent = () => {
 
   return (
     <div className="containernew">
-      
-    {/* Display fetched jobs data as cards */}
-    {jobs?.length > 0 && ( // Check if jobs exist before rendering
+      {/* Display fetched jobs data as cards */}
       <div className="jobs-container">
         {jobs?.map((job) => (
-         <div className="job-card" key={job.jdUid}> {/* Use jdUid as unique key */}
-         <h2>{job.jobRole}</h2> {/* Display job role */}
-         <p>
-           {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
-         </p> {/* Display salary range and currency */}
-         <p>{job.location}</p> {/* Display location */}
-         <p>Experience: {job.minExp} - {job.maxExp} years</p> {/* Display experience range */}
-         <div dangerouslySetInnerHTML={{ __html: job.jobDetailsFromCompany }} /> {/* Display job details safely */}
-         {/* Add more details as needed */}
-       </div>
+          <div className="job-card" key={job.jdUid}>
+            <h2>{job.jobRole}</h2>
+            <p>Company: {job.companyName}</p>
+            <p>Location: {job.location}</p>
+            <p>
+              {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
+            </p>
+            <p>Experience: {job.minExp} - {job.maxExp} years</p>
+            <div
+              className="job-description"
+              dangerouslySetInnerHTML={{
+                __html: job.jobDetailsFromCompany.slice(0, 200) + "...",
+              }}
+            />
+            <a href={job.applyUrl} className="apply-button">
+            <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
+            </a>
+          </div>
         ))}
       </div>
-    )}
-  </div>
+    </div>
   );
 };
 
