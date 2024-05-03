@@ -1,0 +1,47 @@
+.containernew {
+    padding: 1rem;
+    background-color: #f5f5f5; /* Light gray background for container */
+    border-radius: 5px; /* Add subtle border radius to container */
+    max-width: 90%; /* Set a maximum width for responsiveness */
+  }
+  
+  .jobs-container {
+    display: flex;
+    flex-wrap: wrap; /* Enable cards to wrap into multiple rows */
+     /* Distribute cards evenly */
+    row-gap: 1rem; /* Increased spacing between cards */
+    column-gap: 0.25rem;
+    justify-content: space-between;
+  }
+  
+  .job-card {
+    margin: 0.3px; /* Remove margin for better card arrangement */
+    padding: 0.4rem; /* Adjust padding for content spacing */
+    border: none; /* Remove border, use box-shadow instead */
+    border-radius: 10px; /* Increase border radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adjust box-shadow for subtle depth */
+    background-color: #fff; /* White background for cards */
+    transition: all 0.2s ease-in-out; /* Add smooth hover effect */
+    width: calc(33% - 2rem); /* Set width for 3 columns with spacing */
+  }
+  
+  .job-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: translateY(-2px); /* Add slight upward movement on hover */
+    background-color: #f0f0f0; /* Change background color on hover for highlight */
+  }
+  
+  .job-card h2 {
+    margin-bottom: 1rem; /* Add space between heading and content */
+    font-size: 1.1rem; /* Adjust font size for headings */
+    font-weight: bold; /* Make headings bolder */
+  }
+  
+  .job-card p {
+    margin-bottom: 0.5rem; /* Add space between paragraphs */
+    font-size: 0.9rem; /* Adjust font size for content */
+    line-height: 1.5; /* Increase line-height for better readability */
+  }
+  
+  
+  

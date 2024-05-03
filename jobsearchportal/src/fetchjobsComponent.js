@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './styles.css';
 
 const FetchJobsComponent = () => {
   // State to store the fetched jobs data
@@ -35,11 +36,11 @@ const FetchJobsComponent = () => {
         }
 
         // Parse the response as text
-        const data = await response.text();
-        console.log("Fetched Jobs Data:", data); // Log fetched data for debugging
+        const data = await response.json();
+        console.log("Fetched Jobs Data:", data.jdList); // Log fetched data for debugging
 
         // Update the jobs state with the fetched data
-        setJobs(data);
+        setJobs(data.jdList);
       } catch (error) {
         console.error("Error fetching jobs data:", error);
       }
@@ -54,10 +55,26 @@ const FetchJobsComponent = () => {
   }, [jobs]);
 
   return (
-    <div>
-      <h1>Testing if data is fetched</h1>
-      {/* Display the fetched jobs data here (implementation omitted for brevity) */}
-    </div>
+    <div className="containernew">
+      
+    {/* Display fetched jobs data as cards */}
+    {jobs?.length > 0 && ( // Check if jobs exist before rendering
+      <div className="jobs-container">
+        {jobs?.map((job) => (
+         <div className="job-card" key={job.jdUid}> {/* Use jdUid as unique key */}
+         <h2>{job.jobRole}</h2> {/* Display job role */}
+         <p>
+           {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
+         </p> {/* Display salary range and currency */}
+         <p>{job.location}</p> {/* Display location */}
+         <p>Experience: {job.minExp} - {job.maxExp} years</p> {/* Display experience range */}
+         <div dangerouslySetInnerHTML={{ __html: job.jobDetailsFromCompany }} /> {/* Display job details safely */}
+         {/* Add more details as needed */}
+       </div>
+        ))}
+      </div>
+    )}
+  </div>
   );
 };
 
