@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import JobDescription from "./jobDescriptionComponent";
+
 import './styles.css';
+
 
 const FetchJobsComponent = () => {
   // State to store the fetched jobs data
   const [jobs, setJobs] = useState([]);
+  const [jobDescripton, setJobDescription] = useState();
   const [page, setPage] = useState(1);
+  const [expanded, setExpanded] = useState(false);
+  
 
   // Fetches jobs data on component mount
   useEffect(() => {
@@ -70,6 +78,10 @@ const FetchJobsComponent = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
 
   return (
     <div className="containernew">
@@ -77,26 +89,49 @@ const FetchJobsComponent = () => {
       <div className="jobs-container">
         {jobs?.map((job) => (
           <div className="job-card" key={job.jdUid}>
-            <h2>{job.jobRole}</h2>
+            <Typography variant="h6" component="h2" textAlign="left">
+                Job Role: {job.jobRole}
+              </Typography>
             <p>Company: {job.companyName}</p>
             <p>Location: {job.location}</p>
             <p>
-              {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
+              Salary: {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
             </p>
             <p>Experience: {job.minExp} - {job.maxExp} years</p>
+            <Typography variant="h6" component="h2" textAlign="left" >Job Description</Typography>
             <div
               className="job-description"
-              dangerouslySetInnerHTML={{
-                __html: job.jobDetailsFromCompany.slice(0, 200) + "...",
+              dangerouslySetInnerHTML={ {
+                __html:job.jobDetailsFromCompany.slice(0, 200) + "...",
               }}
             />
+           <IconButton
+            className="expand"
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+
+          <>
+            
+            <Typography variant="caption" onClick={()=>{setJobDescription(job.jobDetailsFromCompany)}}>See More</Typography>
+          </>
+        
+          </IconButton>
+
             <a href={job.applyUrl} className="apply-button">
             <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
             </a>
           </div>
         ))}
       </div>
-    </div>
+      {expanded && (
+        
+            
+        <JobDescription jobDescription={jobDescripton}/>
+
+      ) }
+          </div>
   );
 };
 
