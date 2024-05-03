@@ -1,7 +1,7 @@
 .containernew {
     padding: 1rem;
     background-color: #f5f5f5; /* Light gray background for container */
-    border-radius: 5px; /* Add subtle border radius to container */
+     /* Add subtle border radius to container */
     max-width: 90%; /* Set a maximum width for responsiveness */
   }
   
@@ -32,15 +32,39 @@
   }
   
   .job-card h2 {
-    margin-bottom: 0.5rem; /* Add space between heading and content */
+    /* Add space between heading and content */
     font-size: 1.1rem; /* Adjust font size for headings */
     font-weight: bold; /* Make headings bolder */
   }
+
+  .job-card {
+    display: flex; /* Make the job card a flex container */
+  }
+  
+  .job-logo-and-title {
+    width: 30%; /* Allocate 30% width for logo and title */
+    display: flex;
+    align-items: center; /* Align content vertically within */
+  }
+  
+  .job-logo {
+    max-width: 100%; /* Allow logo to fill available width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .job-card > div:nth-child(2) { /* Target second child (company name, title, location) */
+    flex: 1; /* Allow remaining space to expand */
+    padding-left: 1rem; /* Add left padding for spacing */
+  }
+  
+  .job-card > div:nth-child(2) > p { /* Style company name, title, and location */
+    margin-bottom: 0.2rem; /* Add spacing between elements */
+  }
+  
   
   .job-card p {
     margin-bottom: 0.25rem; /* Add space between paragraphs */
     font-size: 0.9rem; /* Adjust font size for content */
-    line-height: 1.5; /* Increase line-height for better readability */
   }
 
   .job-card {
@@ -50,10 +74,17 @@
     align-items: left;
     text-align: left;
   }
+
+  .job-company{
+    font-size: 16px;
+    margin-top: 1rem;
+
+  }
+
   
   .apply-button {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: rgb(85, 239, 196);
+    color: #040404;
     padding: 10px 40px; /* Increased width */
     border: none;
     border-radius: 5px;
@@ -64,7 +95,7 @@
   }
   
   .apply-button:hover {
-    background-color: #3e8e41;
+    background-color: rgb(73, 187, 155);
   }
   
   .apply-button:active {
@@ -174,6 +205,78 @@
     font-size: 1.5rem; /* Adjust font size as needed */
     color: #000; /* Adjust close button color as needed */
   }
+
+  .filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.filter-input,
+.filter-select,
+.filter-checkbox {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.filter-input label,
+.filter-select label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-input input,
+.filter-select select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.filter-input input:focus,
+.filter-select select:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.filter-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-checkbox input {
+  margin-right: 10px;
+}
+
+.job-listing {
+  display: flex;
+  align-items: center; /* Vertically centers content */
+}
+
+.job-image, .job-details {
+  flex: 1/4; /* Makes both divs take up space according to provided ui */
+  margin-right: 4px;
+}
+
+.job-image img {
+  /* Set desired width and height for the logo */
+  width: 40px;
+  height:40px;
+  border-radius: 5px;
+}
+
+
   
   
   

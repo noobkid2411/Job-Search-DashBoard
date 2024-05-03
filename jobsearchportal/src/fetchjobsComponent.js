@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import JobDescription from "./jobDescriptionComponent";
+import Filters from "./filters";
 
 import './styles.css';
 
@@ -86,19 +87,28 @@ const FetchJobsComponent = () => {
   return (
     <div className="containernew">
       {/* Display fetched jobs data as cards */}
+      <Filters/>
       <div className="jobs-container">
         {jobs?.map((job) => (
           <div className="job-card" key={job.jdUid}>
-            <Typography variant="h6" component="h2" textAlign="left">
-                Job Role: {job.jobRole}
+            <div className="job-listing">
+             <div className="job-image">
+              {job.logoUrl && (
+                <img src={job.logoUrl} alt={job.company} className="job-logo" />
+              )}
+            </div>
+            <div className="job-details">
+              <p className="job-company">{job.companyName}</p>
+              <Typography variant="h6" lineHeight={0.25}>
+                {job.jobRole}
               </Typography>
-            <p>Company: {job.companyName}</p>
-            <p>Location: {job.location}</p>
+              <p>{job.location}</p>
+            </div>
+            </div>
             <p>
-              Salary: {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
+              Expected Salary: {job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
             </p>
-            <p>Experience: {job.minExp} - {job.maxExp} years</p>
-            <Typography variant="h6" component="h2" textAlign="left" >Job Description</Typography>
+            <Typography variant="h6" component="h2" textAlign="left" >About The Company:</Typography>
             <div
               className="job-description"
               dangerouslySetInnerHTML={ {
@@ -114,11 +124,12 @@ const FetchJobsComponent = () => {
 
           <>
             
-            <Typography variant="caption" onClick={()=>{setJobDescription(job.jobDetailsFromCompany)}}>See More</Typography>
+            <Typography variant="caption" onClick={()=>{setJobDescription(job.jobDetailsFromCompany)}}>View Details</Typography>
           </>
         
           </IconButton>
-
+          <p>Minimum Experience:</p>
+          <p>{job.minExp} years</p>
             <a href={job.applyUrl} className="apply-button">
             <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
             </a>
