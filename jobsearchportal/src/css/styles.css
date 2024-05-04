@@ -1,0 +1,145 @@
+.containernew {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  max-width: 90%;
+  margin: 0 auto; /* Center the container */
+}
+
+.jobs-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* gap is used for spacing between items */
+}
+
+.job-card {
+  margin-bottom: 1rem; /* Adjust margin for better spacing */
+  padding: 1rem; /* Adjust padding for better spacing */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+  width: calc((100% - 2rem) / 3 - 2rem); /* 3 cards per row */
+}
+
+.job-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  background-color: #f0f0f0;
+}
+
+.job-card h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Adjust margin for better spacing */
+}
+
+.job-company {
+  font-size: 16px;
+  margin-top: 0.5rem; /* Adjust margin for better spacing */
+}
+
+.apply-button {
+  background-color: rgb(85, 239, 196);
+  color: #040404;
+  padding: 10px 20px; /* Adjust padding for better spacing */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 0.5rem; /* Adjust margin for better spacing */
+  text-align: center;
+}
+
+.apply-button:hover {
+  background-color: rgb(73, 187, 155);
+}
+
+.apply-button:active {
+  background-color: rgb(73, 187, 155);
+  box-shadow: 0px 1px 0px rgb(73, 187, 155);
+  transform: translateY(2px);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.filter-input,
+.filter-select,
+.filter-checkbox {
+  flex: 1; /* Let the filters take up equal space */
+  margin-right: 0.5rem; /* Adjust margin for better spacing */
+  margin-bottom: 0.5rem; /* Adjust margin for better spacing */
+}
+
+.filter-input label,
+.filter-select label {
+  display: block;
+  margin-bottom: 0.25rem; /* Adjust margin for better spacing */
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-input input,
+.filter-select select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.filter-input input:focus,
+.filter-select select:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.filter-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-checkbox input {
+  margin-right: 0.5rem; /* Adjust margin for better spacing */
+}
+
+.job-listing {
+  display: flex;
+  align-items: center;
+}
+
+.job-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+/* Media Queries for Responsive Design */
+
+@media only screen and (max-width: 1200px) {
+  .job-card {
+    width:calc((100% - 2rem) / 3 - 2rem); /* Three cards per row on laptops */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .job-card {
+    width: calc(33.33%-2rem); /* Two cards per row on tablets */
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .job-card {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
