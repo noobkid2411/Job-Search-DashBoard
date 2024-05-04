@@ -167,6 +167,30 @@ console.log(filters)
         onChange={handleFilterChange}
       />
       </div>
+      <div className="filter-input">
+      <input
+        type="text"
+        name="techStack"
+        placeholder="Tech Stack"
+        onChange={handleFilterChange}
+      />
+      </div>
+      <div className="filter-input">
+      <input
+        type="text"
+        name="role"
+        placeholder="Role"
+        onChange={handleFilterChange}
+      />
+      </div>
+      <div className="filter-input">
+      <input
+        type="text"
+        name="minBasePay"
+        placeholder="Min Base Pay"
+        onChange={handleFilterChange}
+      />
+      </div>
       <div className="filter-checkbox">
       <input
         type="checkbox"
@@ -226,10 +250,11 @@ console.log(filters)
             <div>
           <p>Minimum Experience:</p>
           <p>Not Specified⚠️</p></div>)}
-          
+          <div className="apply-div">
             <a href={job.applyUrl} className="apply-button">
             <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
             </a>
+            </div>
           </div>
         ))}
      

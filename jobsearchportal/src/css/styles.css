@@ -38,6 +38,12 @@
   margin-top: 0.5rem; /* Adjust margin for better spacing */
 }
 
+.apply-div{
+  display: flex;
+  justify-items: center;
+  width: 100%;
+}
+
 .apply-button {
   background-color: rgb(85, 239, 196);
   color: #040404;
@@ -46,8 +52,10 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  width: 100%; /* Make the button full-width */
   margin-top: 0.5rem; /* Adjust margin for better spacing */
   text-align: center;
+  
 }
 
 .apply-button:hover {
@@ -59,6 +67,7 @@
   box-shadow: 0px 1px 0px rgb(73, 187, 155);
   transform: translateY(2px);
 }
+
 
 .filters {
   display: flex;
@@ -123,6 +132,10 @@
   height: 40px;
   border-radius: 5px;
 }
+
+/* styles.css */
+
+
 
 /* Media Queries for Responsive Design */
 
