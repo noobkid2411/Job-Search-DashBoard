@@ -1,0 +1,61 @@
+.job-description-container {
+    position: fixed; /* Use fixed positioning for full screen */
+    top: 0;
+    left: 0;
+    width: 100%; /* Set width to 100% for full screen */
+    height: 100%; /* Set height to 100% for full screen */
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .close-btn {
+    /* Hide the default button styles */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #030303; /* Adjust default close button color */
+    transition: color 0.2s ease-in-out;
+    top: 5%; /* Move it 5% down from the top */
+    left: 96.9%; 
+    
+  }
+  
+  .close-btn:hover {
+    color: #333; /* Change color on hover */
+  }
+  
+  .popup {
+    position:relative;
+    background-color: white;
+    width: 70%; /* Adjust width as needed */
+    max-height: 80%; /* Adjust maximum height as needed */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  }
+  
+  .popup-content {
+    padding: 20px;
+  }
+  .popup-title {
+    padding: 20px;
+  }
+  
+  /* Adjust scrollbar styles */
+  .popup::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .popup::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  
+  .popup::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+  
+  
