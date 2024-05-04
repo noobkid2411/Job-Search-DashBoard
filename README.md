@@ -5,14 +5,15 @@ This repository contains the source code for a Job Search Dashboard, which is a 
 ## Features
 
 - **Job Listings**: Users can browse through available job listings, view details of each job, and apply to them directly through the dashboard.
-- **Save Favorites**: Users can save their favorite job listings to review later.
 - **Filters**: Multiple filters to filter down the job you want.
 - **Responsive Design**: The dashboard is designed to work seamlessly across various devices, including desktops, tablets, and smartphones.
 
 ## Technologies Used
 
-- **Frontend**: ReactJs,Vanilla CSS, Material UI
-- **External API**
+- **ReactJs**
+- **Vanilla Css**
+- **Material UI**
+- **Weekday API**
 
 ## Installation
 
