@@ -218,8 +218,15 @@ console.log(filters)
           </>
         
           </IconButton>
+          {job.minExp &&(
+            <div>
           <p>Minimum Experience:</p>
-          <p>{job?.minExp} years</p>
+          <p>{job?.minExp} years</p></div>)}
+          {!job.minExp &&(
+            <div>
+          <p>Minimum Experience:</p>
+          <p>Not Specified⚠️</p></div>)}
+          
             <a href={job.applyUrl} className="apply-button">
             <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
             </a>
