@@ -2,19 +2,25 @@ import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import JobDescription from "./jobDescriptionComponent";
-import Filters from "./filters";
+import { connectToRedux, ReduxProvider, updateFilter } from "./redux";
 
-import './styles.css';
+import './css/styles.css';
 
 
-const FetchJobsComponent = () => {
+const FetchJobsComponent = ({filters,updateFilter}) => {
   // State to store the fetched jobs data
   const [jobs, setJobs] = useState([]);
   const [jobDescripton, setJobDescription] = useState();
   const [page, setPage] = useState(1);
   const [expanded, setExpanded] = useState(false);
-  
+  const [filteredJobs,setFilteredJobs] =useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+  
+console.log(filters)
   // Fetches jobs data on component mount
   useEffect(() => {
     const fetchData = async () => {
@@ -83,14 +89,98 @@ const FetchJobsComponent = () => {
     setExpanded(!expanded);
   };
 
+   const handleFilterChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const filterValue = type === "checkbox" ? checked : value;
+    updateFilter({ [name]: filterValue });}
+
+    useEffect(() => {
+      // Filter jobs based on the filters state
+      const filtered = jobs.filter((job) => {
+        if (filters?.minExperience && job.minExp < filters.minExperience) {
+          return false;
+        }
+        if (filters?.companyName && !job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) {
+          return false;
+        }
+        if (filters?.location && !job.location.toLowerCase().includes(filters.location.toLowerCase())) {
+          return false;
+        }
+        if (filters?.remote && !job.location.toLowerCase().includes("remote")) {
+          return false;
+        }
+        if (filters?.techStack && !job.techStack.toLowerCase().includes(filters.techStack.toLowerCase())) {
+          return false;
+        }
+        if (filters?.role && !job.jobRole.toLowerCase().includes(filters.role.toLowerCase())) {
+          return false;
+        }
+        if (filters?.minBasePay && job.minJdSalary < filters.minBasePay) {
+          return false;
+        }
+        return true;
+      });
+      setFilteredJobs(prevFilteredJobs => {
+        const newFilteredJobs = [];
+        newFilteredJobs.push(...filtered); // Push the filtered items into the copy
+        return newFilteredJobs; // Set the state with the copy containing both previous and new filtered items
+      });
+    }, [filters, jobs]);
+    
+
+
+
+
+  useEffect(() => {
+    console.log("Jobs:", jobs);
+    console.log("Filtered Jobs:", filteredJobs);
+  }, [filteredJobs]);
+
+
 
   return (
     <div className="containernew">
       {/* Display fetched jobs data as cards */}
-      <Filters/>
-      <div className="jobs-container">
-        {jobs?.map((job) => (
-          <div className="job-card" key={job.jdUid}>
+    
+      <div className="filters">
+      <div className="filter-input">
+      <input
+        type="text"
+        name="minExperience"
+        placeholder="Min Experience"
+        onChange={handleFilterChange}
+      />
+      </div>
+      <div className="filter-input">
+      <input
+        type="text"
+        name="companyName"
+        placeholder="Company Name"
+        onChange={handleFilterChange}
+      />
+      </div>
+      <div className="filter-input">
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        onChange={handleFilterChange}
+      />
+      </div>
+      <div className="filter-checkbox">
+      <input
+        type="checkbox"
+        name="remote"
+        onChange={handleFilterChange}
+      />
+      <label htmlFor="remote">Remote</label>
+      {/* Add other filter inputs */}
+    </div>
+    </div>
+    <div className="jobs-container">
+   
+      {filteredJobs.map((job) => (
+          <div className="job-card">
             <div className="job-listing">
              <div className="job-image">
               {job.logoUrl && (
@@ -112,7 +202,7 @@ const FetchJobsComponent = () => {
             <div
               className="job-description"
               dangerouslySetInnerHTML={ {
-                __html:job.jobDetailsFromCompany.slice(0, 200) + "...",
+                __html:job?.jobDetailsFromCompany.slice(0, 200) + (job?.jobDetailsFromCompany.length > 200 ? "..." : "")
               }}
             />
            <IconButton
@@ -124,26 +214,27 @@ const FetchJobsComponent = () => {
 
           <>
             
-            <Typography variant="caption" onClick={()=>{setJobDescription(job.jobDetailsFromCompany)}}>View Details</Typography>
+            <Typography variant="caption" onClick={()=>{setJobDescription(job.jobDetailsFromCompany);setIsPopupOpen(true)}}>View Details</Typography>
           </>
         
           </IconButton>
           <p>Minimum Experience:</p>
-          <p>{job.minExp} years</p>
+          <p>{job?.minExp} years</p>
             <a href={job.applyUrl} className="apply-button">
             <span role="img" aria-label="thunder emoji">⚡️</span>Easy Apply
             </a>
           </div>
         ))}
-      </div>
-      {expanded && (
-        
-            
-        <JobDescription jobDescription={jobDescripton}/>
+     
+      {isPopupOpen &&(
+        <JobDescription jobDescription={jobDescripton}  onClose={togglePopup}/>
 
       ) }
+          </div>
           </div>
   );
 };
 
-export default FetchJobsComponent;
+
+const ConnectedFetchJobsComponent = connectToRedux(FetchJobsComponent);
+export default ConnectedFetchJobsComponent
